@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Colors */
+    --color-background: #FAFAF9; /* warm off-white */
+    --color-foreground: #2D2D2D; /* near-black with warmth */
+    --color-card: #FFFFFF; /* pure white */
+    --color-card-foreground: #2D2D2D; /* near-black with warmth */
+    --color-popover: #FFFFFF; /* pure white */
+    --color-popover-foreground: #2D2D2D; /* near-black with warmth */
+    --color-muted: #F5F5F4; /* light gray */
+    --color-muted-foreground: #6B6B6B; /* medium gray */
+    --color-border: #E5E5E5; /* light border */
+    --color-input: #FFFFFF; /* pure white */
+    --color-ring: #8B4513; /* warm brown */
+
+    /* Brand Colors */
+    --color-primary: #8B4513; /* warm brown */
+    --color-primary-foreground: #FFFFFF; /* white */
+    --color-secondary: #D2691E; /* orange-brown */
+    --color-secondary-foreground: #FFFFFF; /* white */
+    --color-accent: #FF6B35; /* energetic coral */
+    --color-accent-foreground: #FFFFFF; /* white */
+
+    /* Status Colors */
+    --color-success: #22C55E; /* fresh green */
+    --color-success-foreground: #FFFFFF; /* white */
+    --color-warning: #F59E0B; /* amber */
+    --color-warning-foreground: #FFFFFF; /* white */
+    --color-error: #EF4444; /* clear red */
+    --color-error-foreground: #FFFFFF; /* white */
+    --color-destructive: #EF4444; /* clear red */
+    --color-destructive-foreground: #FFFFFF; /* white */
+
+    /* Typography */
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-caption: 'Inter', sans-serif;
+    --font-data: 'JetBrains Mono', monospace;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.1);
+    --shadow-floating: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+    /* Border Radius */
+    --radius: 6px;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+
+  .font-data {
+    font-family: var(--font-data);
+  }
+}
+
+@layer components {
+  /* Micro-animations */
+  .animate-press {
+    @apply transition-transform duration-150 ease-out active:scale-[0.98];
+  }
+
+  /* Contextual color coding */
+.status-overlay-success  {
+
+  }
+.status-overlay-warning  {
+
+  }
+.status-overlay-error  {
+
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    @apply animate-pulse bg-muted rounded;
+  }
+
+  /* Floating action button */
+  .fab {
+    @apply fixed bottom-6 right-6 w-14 h-14 rounded-full shadow-floating z-50;
+    @apply bg-primary text-primary-foreground;
+    @apply flex items-center justify-center;
+    @apply transition-all duration-200 ease-out;
+    @apply hover:shadow-lg active:scale-95;
+  }
+
+  /* Gesture-friendly interactions */
+  .swipe-item {
+    @apply transition-transform duration-200 ease-out;
+  }
+
+  .swipe-item:active {
+    @apply scale-[0.98];
+  }
+
+  /* Progressive disclosure */
+  .expandable-card {
+    @apply transition-all duration-300 ease-out;
+    @apply overflow-hidden;
+  }
+
+  /* Navigation specific */
+.nav-item  {
+    @apply flex items-center gap-3 px-4 py-3 rounded-lg;
+    @apply text-muted-foreground hover:text-foreground;
+    @apply transition-colors duration-200;
+  }
+.nav-item.active  {
+    @apply text-primary font-medium;
+  }
+
+  .nav-item.active .nav-icon {
+    @apply text-primary;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    @apply fixed left-0 top-0 h-full w-60 bg-card border-r border-border;
+    @apply flex flex-col z-40;
+  }
+
+  .sidebar-collapsed {
+    @apply w-16;
+  }
+
+  /* Mobile navigation */
+  .mobile-nav {
+    @apply fixed bottom-0 left-0 right-0 bg-card border-t border-border;
+    @apply flex items-center justify-around px-2 py-2 z-40;
+  }
+
+  .mobile-nav-item {
+    @apply flex flex-col items-center gap-1 px-3 py-2 rounded-lg;
+    @apply text-muted-foreground hover:text-foreground;
+    @apply transition-colors duration-200 min-w-0 flex-1;
+  }
+
+  .mobile-nav-item.active {
+    @apply text-primary;
+  }
+
+  .mobile-nav-label {
+    @apply text-xs font-medium truncate max-w-full;
+  }
+}
+
+@layer utilities {
+  /* Content spacing for fixed navigation */
+  .content-with-sidebar {
+    @apply ml-60;
+  }
+
+  .content-with-sidebar-collapsed {
+    @apply ml-16;
+  }
+
+  .content-with-mobile-nav {
+    @apply pb-20;
+  }
+
+  /* Responsive utilities */
+  @media (max-width: 768px) {
+    .content-with-sidebar,
+    .content-with-sidebar-collapsed {
+      @apply ml-0;
+    }
+  }
+}
